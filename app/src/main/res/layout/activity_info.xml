@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/zagadnienia"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/zagadnienia_zawarte_w_aplikacji_to_podstawy_teorii_fizyki_na_poziomie_maturalnym_opisane_wzorami_zagadnienienia_teoretyczne_b_d_progresywnie_poszerzane_w_kolejnych_aktualizacjach_aplikacji"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/fiszki"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/fiszki_to_tryb_stworzony_do_nauki_wzor_w_zawartych_w_zagadnieniach_tryb_fiszek_dla_okre_lonego_rozdzia_u_zawiera_wszystki_wzory_om_wione_w_rozdziale_aby_zmieni_fiszk_nale_y_przesun_c_palcem_po_ekranie_od_lewej_do_prawej_z_prawej_do_lewej_by_cofn_fiszk_aby_wy_wietli_schowa_fiszk_przytrzymaj_palcem_na_ekranie"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/fiszki_maturalne"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/tryb_fiszek_maturalnych_zawiera_te_wzory_kt_re_zosta_y_om_wione_w_rozdzia_ach_ale_nie_znajduj_si_na_karcie_wzor_w_cke_podczas_egzaminu_maturalnego_aby_zmieni_fiszk_nale_y_przesun_c_palcem_po_ekranie_od_lewej_do_prawej_aby_wy_wietli_schowa_fiszk_przytrzymaj_palcem_na_ekranie"
+            android:textAlignment="center"
+            android:textSize="15sp" />
+
+
+        <ImageView
+            android:id="@+id/ivClake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/clake"
+            android:src="@drawable/clake"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tekst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/fizykor_v3_0"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/clake_studio_2018"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/podzi_kowania_dla_adama_i_zespo_u_beta_tester_w_w_razie_pyta_sugestii_prosz_o_kontakt_przez_komentarz_e_mail_tre_ci_b_d_progresywnie_rozwijane"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</ScrollView>

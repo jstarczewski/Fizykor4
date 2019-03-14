@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/kinematyka"
+            android:checked="true"
+            android:title="@string/kinematyka" />
+        <item
+            android:id="@+id/dynamika"
+            android:title="@string/dynamika" />
+        <item
+            android:id="@+id/pracaMocEnergia"
+            android:title="@string/praca_moc_energia" />
+        <item
+            android:id="@+id/bryla"
+            android:title="@string/bry_a_szytywna" />
+        <item
+            android:id="@+id/termodynamika"
+            android:title="@string/termodynamika" />
+        <item
+            android:id="@+id/grawitacja"
+            android:title="@string/grawitacja_kosmos" />
+        <item
+            android:id="@+id/drgajacy"
+            android:title="@string/ruch_drgaj_cy" />
+        <item
+            android:id="@+id/mechaniczne"
+            android:title="@string/fale_mechaniczne" />
+        <item
+            android:id="@+id/Elektorstatyka"
+            android:title="@string/elektrostatyka" />
+        <item
+            android:id="@+id/pradstatly"
+            android:title="@string/pr_d_sta_y" />
+        <item
+            android:id="@+id/magnetyzm"
+            android:title="@string/magnetyzm" />
+        <item
+            android:id="@+id/IndukcjaElektro"
+            android:title="@string/indukcja_elektromagnetyczna" />
+        <item
+            android:id="@+id/przemienny"
+            android:title="@string/pr_d_przemienny_i_obwody" />
+        <item
+            android:id="@+id/optyka"
+            android:title="@string/optyka" />
+        <item
+            android:id="@+id/wspolczesna"
+            android:title="@string/fizyka_wsp_czesna" />
+    </group>
+
+    <item android:title="@string/sta_e_i_przedrostki"
+        android:visible="true"
+        android:id="@+id/stale_i_przedrostki">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/stale"
+                    android:title="@string/sta_e_fizyczne" />
+                <item
+                    android:id="@+id/przedrostki"
+                    android:title="@string/przedrostki" />
+            </group>
+        </menu>
+
+
+    </item>
+
+
+</menu>
