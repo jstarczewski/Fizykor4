@@ -9,7 +9,7 @@ Fizykor to wzory fizyczne zawsze pod ręką
 ## About Fizykor
 ![Back](/images/back.PNG)
 
-Third version of my most popular app relesed in Google Play Store back in 2016 now with new architecutre.  
+Third version of my most popular app relesed in Google Play Store back in 2016 now with new architecutre. This repository contains production version of Fizykor. The goal is to keep the production version as simple as possible and provide best user experience. [Here](https://github.com/jstarczewski/Fizykor3) is the alternative version of the app with the same functionality implemented using dependency injection framework and more Android Jetpack components.  
 - [x] Kotlin
 - [x] MVVM architecture
 - [x] Room persistance Library
@@ -18,15 +18,10 @@ Third version of my most popular app relesed in Google Play Store back in 2016 n
 - [x] MathView (my own third party view library for kotlin)
 ## Future of Fizykor
 I set myself a goal to publish Fizykor in 2018. Now app is working, but there are several issues that I will add and then solve. The biggest problem is the amount of memory app needs. In the nearest furure I would like to:  
-- [x] Refactor code so it uses RecyclerView.
-- [x] Restructure database and imitate many equations in one RecyclerView object, so the app will use less memory.
-- [ ] Test view-models.  
-## No RecyclerView solution
-I decided to get rid of RecyclerView because of this particular use case where the Database will not grow and the number of needed MathView objects is limited and known at start. Thanks to this approach we use more phones memory but we have smoother user epererience while scrolling.  
-  
-![Demo NoRecyclerView](/images/gif_no_recycler_view.gif)  
-  
-With RecyclerView the amount of used memory is smaller, but the user experience while scrolling is horrible.  
-  
-![Demo RecyclerView](/images/gif_recycler_view.gif)
+- [ ] Make Fizykro fragmentless
+- [ ] Add remote Firebase database to sync equations
+- [ ] Refactor animations to provide better user experience
+- [ ] Test the app with Espresso, JUnit and Mockito
 
+## No RecyclerView solution or RecyclerView solution?
+After implementing equations inside RecyclerView or without RecyclerView the optimal solution that gives the best user experience is to display many equations in one RecyclerView item.
