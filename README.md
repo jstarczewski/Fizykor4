@@ -18,7 +18,7 @@ Third version of my most popular app relesed in Google Play Store back in 2016 n
 - [x] MathView (my own third party view library for kotlin)
 ## Future of Fizykor
 I set myself a goal to publish Fizykor in 2018. Now app is working, but there are several issues that I will add and then solve. The biggest problem is the amount of memory app needs. In the nearest furure I would like to:  
-- [ ] Make Fizykro fragmentless
+- [ ] Make Fizykor fragmentless
 - [ ] Add remote Firebase database to sync equations
 - [ ] Refactor animations to provide better user experience
 - [ ] Test the app with Espresso, JUnit and Mockito
