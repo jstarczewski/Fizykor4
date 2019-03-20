@@ -1,10 +1,15 @@
 package com.clakestudio.pc.fizykor.flashcards
 
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GestureDetectorCompat
 import android.view.*
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.clakestudio.pc.fizykor.R
@@ -70,7 +75,23 @@ class FlashCardsFragment : Fragment(), GestureDetector.OnGestureListener, View.O
     }
 
     private fun animatePrevious() {
-        cvFlashCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.card_view_transition_out_to_left))
+        //cvFlashCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.card_view_transition_out_to_left))
+        var animation = AnimationUtils.loadAnimation(context, R.anim.card_view_transition_out_to_left)
+        animation.setAnimationListener(object : Animation.AnimationListener {
+
+            override fun onAnimationRepeat(animation: Animation?) {
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                cvFlashCard.visibility = View.INVISIBLE
+                animateNext()
+            }
+
+            override fun onAnimationStart(animation: Animation?) {
+            }
+
+        })
+        cvFlashCard.startAnimation(animation)
     }
 
     private fun setupCheckBox() {
@@ -78,7 +99,19 @@ class FlashCardsFragment : Fragment(), GestureDetector.OnGestureListener, View.O
     }
 
     override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
-        viewFragmentBinding.viewmodel?.determineAnimation(e1!!.x, e2!!.x)
+
+        cvFlashCard.animate()
+                .translationX(500F)
+                .setStartDelay(100L)
+                .start()
+        //cvFlashCard.animate().translationX(-100F)
+         //       .start()
+
+
+
+
+        animatePrevious()
+        //viewFragmentBinding.viewmodel?.determineAnimation(e1!!.x, e2!!.x)
         return true
     }
 
