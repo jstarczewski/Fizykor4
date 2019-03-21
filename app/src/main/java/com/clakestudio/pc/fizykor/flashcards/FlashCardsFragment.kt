@@ -75,23 +75,7 @@ class FlashCardsFragment : Fragment(), GestureDetector.OnGestureListener, View.O
     }
 
     private fun animatePrevious() {
-        //cvFlashCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.card_view_transition_out_to_left))
-        var animation = AnimationUtils.loadAnimation(context, R.anim.card_view_transition_out_to_left)
-        animation.setAnimationListener(object : Animation.AnimationListener {
-
-            override fun onAnimationRepeat(animation: Animation?) {
-            }
-
-            override fun onAnimationEnd(animation: Animation?) {
-                cvFlashCard.visibility = View.INVISIBLE
-                animateNext()
-            }
-
-            override fun onAnimationStart(animation: Animation?) {
-            }
-
-        })
-        cvFlashCard.startAnimation(animation)
+        cvFlashCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.card_view_transition_out_to_left))
     }
 
     private fun setupCheckBox() {
@@ -99,19 +83,7 @@ class FlashCardsFragment : Fragment(), GestureDetector.OnGestureListener, View.O
     }
 
     override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
-
-        cvFlashCard.animate()
-                .translationX(500F)
-                .setStartDelay(100L)
-                .start()
-        //cvFlashCard.animate().translationX(-100F)
-         //       .start()
-
-
-
-
-        animatePrevious()
-        //viewFragmentBinding.viewmodel?.determineAnimation(e1!!.x, e2!!.x)
+        viewFragmentBinding.viewmodel?.determineAnimation(e1!!.x, e2!!.x)
         return true
     }
 

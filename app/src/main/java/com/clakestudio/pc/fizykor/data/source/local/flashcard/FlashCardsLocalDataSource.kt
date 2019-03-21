@@ -7,6 +7,8 @@ import io.reactivex.Flowable
 
 class FlashCardsLocalDataSource(private val flashCardDao: FlashCardDao) : FlashCardsDataSource {
 
+    override fun selectFlashCardsWhereTitleIs(title: String) = flashCardDao.selectFlashCardsWhereTitleIs(title)
+
     override fun getAllFlashCards(): Flowable<List<FlashCard>> = flashCardDao.getAllFlashCards()
 
     override fun saveFlashCard(flashCard: FlashCard) {

@@ -21,6 +21,8 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     var title: ObservableField<String> = ObservableField()
     var equation: ObservableField<String> = ObservableField()
 
+
+    var visibility: ObservableField<Boolean> = ObservableField(true)
     var animateNewFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     var animatePreviousFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
 
@@ -33,14 +35,13 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     
     var isMaturaMode = false
 
-    var visibility: ObservableField<Boolean> = ObservableField(true)
 
     var filtering = "Kinematyka"
 
     private val flashCardsBackStack = Stack<FlashCard>()
 
     fun start() {
-        if (!rawFlashCards.isEmpty()) loadData()
+        if (rawFlashCards.isEmpty()) loadData()
     }
 
     fun filterFlashCards(filtering: String) {
