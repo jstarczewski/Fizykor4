@@ -20,19 +20,18 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
 
     var title: ObservableField<String> = ObservableField()
     var equation: ObservableField<String> = ObservableField()
-
     var visibility: ObservableField<Boolean> = ObservableField(true)
+
     var animateNewFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     var animatePreviousFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
 
     private val compositeDisposable = CompositeDisposable()
 
     private var flashCards: ArrayList<FlashCard> = ArrayList()
+    lateinit var filtering: String
 
     private var isLastOperationPush = false
-
     var isMaturaMode = false
-    lateinit var filtering: String
 
     private val flashCardsBackStack = Stack<FlashCard>()
 
@@ -40,11 +39,15 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         if (flashCards.isEmpty()) filter()
     }
 
+    fun load() {
+        
+    }
+
     fun filter() {
         val disposable = equationsRepository.selectFlashCardsWhereTitleIs(filtering)
                 .subscribeOn(AppSchedulersProvider.ioScheduler())
                 .subscribe {
-                    loadFlashCards(it)
+                    flashCards.addAll(it)
                 }
         compositeDisposable.add(disposable)
 
@@ -104,11 +107,10 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         if (x2 > x1 && delta > MIN_DISTANCE) {
             setNewFlashCard()
             animateNewFlashCardEvent.call()
-        } else if (x1 > x2 && abs(delta) > MIN_DISTANCE) {
+        } else if (x2 < x1 && abs(delta) > MIN_DISTANCE) {
             setPreviousFlashCard()
             animatePreviousFlashCardEvent.call()
         }
-        // despite being true hides the equation
         visibility.set(true)
     }
 

@@ -33,6 +33,7 @@ class FlashCardsFragment : Fragment(), GestureDetector.OnGestureListener, View.O
             viewmodel = (activity as FlashCardsActivity).obtainViewModel().apply {
                 animatePreviousFlashCardEvent.observe(this@FlashCardsFragment, Observer { animatePrevious() })
                 animateNewFlashCardEvent.observe(this@FlashCardsFragment, Observer { animateNext() })
+                visibility
             }
 
         }
