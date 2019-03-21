@@ -30,9 +30,9 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     private var flashCards: ArrayList<FlashCard> = ArrayList()
 
     private var isLastOperationPush = false
-    
+
     var isMaturaMode = false
-    lateinit var filtering : String
+    lateinit var filtering: String
 
     private val flashCardsBackStack = Stack<FlashCard>()
 
@@ -40,7 +40,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         if (flashCards.isEmpty()) filter()
     }
 
-    private fun filter() {
+    fun filter() {
         val disposable = equationsRepository.selectFlashCardsWhereTitleIs(filtering)
                 .subscribeOn(AppSchedulersProvider.ioScheduler())
                 .subscribe {
@@ -86,14 +86,15 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         isLastOperationPush = true
     }
 
-    private fun addToFlashCardsBackStack(index: Int) = if (!isMaturaMode) flashCardsBackStack.push(flashCards[index]) else flashCardsBackStack.push(flashCards.filter { it.isMatura }[index])
+    private fun addToFlashCardsBackStack(index: Int) =
+            if (!isMaturaMode) flashCardsBackStack.push(flashCards[index])
+            else flashCardsBackStack.push(flashCards.filter { it.isMatura }[index])
 
     private fun setPreviousFlashCard() {
         if (!flashCardsBackStack.isEmpty()) {
-            var previousFlashCard = flashCardsBackStack.pop()
+            flashCardsBackStack.pop()
             if (isLastOperationPush && !flashCardsBackStack.isEmpty())
-                previousFlashCard = flashCardsBackStack.pop()
-            setData(previousFlashCard)
+                setData(flashCardsBackStack.pop())
             isLastOperationPush = false
         } else setNewFlashCard()
     }

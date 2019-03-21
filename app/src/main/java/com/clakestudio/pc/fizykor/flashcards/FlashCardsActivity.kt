@@ -28,7 +28,7 @@ class FlashCardsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         flashCardsViewModel = obtainViewModel().apply {
-            filtering = obtainFiltering()
+            filtering = obtainFiltering()!!
         }
 
         setupViewFragment()
@@ -60,7 +60,6 @@ class FlashCardsActivity : AppCompatActivity() {
     private fun setupDrawerContent(navigationView: NavigationView) {
         navigationView.setNavigationItemSelectedListener { menuItem ->
 
-            flashCardsViewModel.filterFlashCards(menuItem.title.toString())
             menuItem.isChecked = true
             toolbar.title = menuItem.title.toString()
             drawerLayout.closeDrawers()
@@ -89,7 +88,7 @@ class FlashCardsActivity : AppCompatActivity() {
 
     fun obtainViewModel(): FlashCardsViewModel = obtainViewModel(FlashCardsViewModel::class.java)
 
-    private fun obtainFiltering() = intent.getStringExtra("Filtering")
+    private fun obtainFiltering() = intent.extras?.getString("Filtering")
 
     private fun obtainItemId() = intent.getIntExtra("CheckedItemIndex", 0)
 
