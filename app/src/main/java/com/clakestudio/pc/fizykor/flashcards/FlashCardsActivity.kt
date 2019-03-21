@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.clakestudio.pc.fizykor.R
 import com.clakestudio.pc.fizykor.util.InfoActivity
 import com.clakestudio.pc.fizykor.util.obtainViewModel
@@ -29,39 +28,21 @@ class FlashCardsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         flashCardsViewModel = obtainViewModel().apply {
-
-            // Interactions
+            filtering = obtainFiltering()
         }
+
         setupViewFragment()
         setupNavigationDrawer()
-        retriveIntentData()
-
-        setupActionBar(R.id.toolbar) {
-            setHomeAsUpIndicator(R.drawable.ic_menu)
-            title = flashCardsViewModel.filtering
-            setDisplayHomeAsUpEnabled(true)
-        }
-
+        setUpNavigationViewInitialValue()
+        setupActionBar()
 
     }
 
-    private fun retriveIntentData() {
-        (findViewById<NavigationView>(R.id.nav_view)).setCheckedItem(intent.getIntExtra("CheckedItemIndex", 0))
-    }
-
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
+    private fun setUpNavigationViewInitialValue() = (findViewById<NavigationView>(R.id.nav_view)).setCheckedItem(obtainItemId())
 
     private fun setupViewFragment() {
-
         supportFragmentManager.findFragmentById(R.id.contentFrame)
                 ?: replaceFragmentInActivity(FlashCardsFragment.newInstance(), R.id.contentFrame)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -70,8 +51,6 @@ class FlashCardsActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationDrawer() {
-
-
         drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
             setStatusBarBackground(R.color.colorPrimaryDark)
         }
@@ -79,8 +58,6 @@ class FlashCardsActivity : AppCompatActivity() {
     }
 
     private fun setupDrawerContent(navigationView: NavigationView) {
-
-
         navigationView.setNavigationItemSelectedListener { menuItem ->
 
             flashCardsViewModel.filterFlashCards(menuItem.title.toString())
@@ -91,7 +68,12 @@ class FlashCardsActivity : AppCompatActivity() {
 
         }
         navigationView.menu.findItem(R.id.stale_i_przedrostki).isVisible = false
+    }
 
+    private fun setupActionBar() = setupActionBar(R.id.toolbar) {
+        setHomeAsUpIndicator(R.drawable.ic_menu)
+        title = flashCardsViewModel.filtering
+        setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -100,14 +82,16 @@ class FlashCardsActivity : AppCompatActivity() {
                 drawerLayout.openDrawer(GravityCompat.START)
                 return true
             }
-            R.id.action_info -> {
-                startActivity(Intent(this, InfoActivity::class.java))
-            }
+            R.id.action_info -> startActivity(Intent(this, InfoActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
 
     fun obtainViewModel(): FlashCardsViewModel = obtainViewModel(FlashCardsViewModel::class.java)
+
+    private fun obtainFiltering() = intent.getStringExtra("Filtering")
+
+    private fun obtainItemId() = intent.getIntExtra("CheckedItemIndex", 0)
 
 
 }

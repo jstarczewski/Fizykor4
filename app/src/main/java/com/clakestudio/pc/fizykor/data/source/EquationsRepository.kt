@@ -30,7 +30,7 @@ class EquationsRepository(private var equationsLocalDataSource: EquationsDataSou
 
     override fun getAllFlashCards(): Flowable<List<FlashCard>> = flashCardsLocalDataSource.getAllFlashCards()
 
-
+    override fun selectFlashCardsWhereTitleIs(title: String): Flowable<List<FlashCard>> = flashCardsLocalDataSource.selectFlashCardsWhereTitleIs(title)
 
     override fun saveFlashCard(flashCard: FlashCard) = flashCardsLocalDataSource.saveFlashCard(flashCard)
 

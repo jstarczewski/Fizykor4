@@ -21,7 +21,6 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     var title: ObservableField<String> = ObservableField()
     var equation: ObservableField<String> = ObservableField()
 
-
     var visibility: ObservableField<Boolean> = ObservableField(true)
     var animateNewFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     var animatePreviousFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
@@ -29,31 +28,20 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     private val compositeDisposable = CompositeDisposable()
 
     private var flashCards: ArrayList<FlashCard> = ArrayList()
-    private var rawFlashCards: ArrayList<FlashCard> = ArrayList()
 
     private var isLastOperationPush = false
     
     var isMaturaMode = false
-
-
-    var filtering = "Kinematyka"
+    lateinit var filtering : String
 
     private val flashCardsBackStack = Stack<FlashCard>()
 
     fun start() {
-        if (rawFlashCards.isEmpty()) loadData()
+        if (flashCards.isEmpty()) filter()
     }
 
-    fun filterFlashCards(filtering: String) {
-
-        flashCards.clear()
-        flashCards.addAll(rawFlashCards.filter { flashCard -> flashCard.section == filtering })
-
-    }
-
-    private fun loadData() {
-
-        val disposable = equationsRepository.getAllFlashCards()
+    private fun filter() {
+        val disposable = equationsRepository.selectFlashCardsWhereTitleIs(filtering)
                 .subscribeOn(AppSchedulersProvider.ioScheduler())
                 .subscribe {
                     loadFlashCards(it)
@@ -63,9 +51,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     }
 
     private fun loadFlashCards(flashCards: List<FlashCard>) {
-        this.rawFlashCards.clear()
-        this.rawFlashCards.addAll(flashCards)
-        filterFlashCards(filtering)
+        this.flashCards.addAll(flashCards)
         setNewFlashCard()
         compositeDisposable.clear()
     }
