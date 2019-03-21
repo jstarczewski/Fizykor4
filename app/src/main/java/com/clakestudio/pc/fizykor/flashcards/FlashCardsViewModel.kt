@@ -13,10 +13,11 @@ import kotlin.math.abs
 import kotlin.random.Random
 
 
-private const val MIN_DISTANCE = 200
 
 class FlashCardsViewModel(private val equationsRepository: EquationsRepository) : ViewModel() {
 
+
+    private val minDistance = 200
 
     var title: ObservableField<String> = ObservableField()
     var equation: ObservableField<String> = ObservableField()
@@ -40,7 +41,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     }
 
     fun load() {
-        
+
     }
 
     fun filter() {
@@ -104,10 +105,10 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
 
     fun determineAnimation(x1: Float, x2: Float) {
         val delta = x2 - x1
-        if (x2 > x1 && delta > MIN_DISTANCE) {
+        if (x2 > x1 && delta > minDistance) {
             setNewFlashCard()
             animateNewFlashCardEvent.call()
-        } else if (x2 < x1 && abs(delta) > MIN_DISTANCE) {
+        } else if (x2 < x1 && abs(delta) > minDistance) {
             setPreviousFlashCard()
             animatePreviousFlashCardEvent.call()
         }
