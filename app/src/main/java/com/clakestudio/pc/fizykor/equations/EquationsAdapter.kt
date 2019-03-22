@@ -2,7 +2,6 @@ package com.clakestudio.pc.fizykor.equations
 
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +12,13 @@ import com.jstarczewski.pc.mathview.src.MathView
 
 class EquationsAdapter(private var equations: ArrayList<List<Equation>>) : RecyclerView.Adapter<EquationsAdapter.ViewHolder>() {
 
+    class ViewHolder(binding: MultiEquationBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    class ViewHolder(private val binding: com.clakestudio.pc.fizykor.databinding.MultiEquationBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        val updateData = { tv: TextView, mv: MathView, cv: CardView, equation: Equation ->
-            (if (equation.title == "") cv.visibility = View.GONE else { tv.text = equation.title; mv.text = equation.equation }) }
+        /**
+         * This Multi Equation Binding pattern as a RecyclerView object is based on Spaghetti Code design pattern and was the only
+         * solution that I came up with that guarantees enough scrolling performance and reduces
+         * memory leak that happens because of WebViews used to display equations.
+         * */
 
         private val textViews = arrayListOf(binding.tvTitle1, binding.tvTitle2, binding.tvTitle3, binding.tvTitle4)
         private val mathViews = arrayListOf(binding.mvEquation1, binding.mvEquation2, binding.mvEquation3, binding.mvEquation4)
@@ -27,6 +28,12 @@ class EquationsAdapter(private var equations: ArrayList<List<Equation>>) : Recyc
             for (x in 0..3)
                 updateData(textViews[x], mathViews[x], cardViews[x], equationsList[x])
         }
+
+        private fun updateData(tv: TextView, mv: MathView, cv: CardView, equation: Equation) {
+            if (equation.title.isEmpty()) cv.visibility = View.GONE
+            else tv.text = equation.title; mv.text = equation.equation
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EquationsAdapter.ViewHolder {
@@ -50,11 +57,8 @@ class EquationsAdapter(private var equations: ArrayList<List<Equation>>) : Recyc
     fun replaceData(equations: ArrayList<List<Equation>>) = setEquations(equations)
 
     private fun setEquations(equations: ArrayList<List<Equation>>) {
-
         this.equations = equations
         notifyDataSetChanged()
-
-
     }
 
 }
