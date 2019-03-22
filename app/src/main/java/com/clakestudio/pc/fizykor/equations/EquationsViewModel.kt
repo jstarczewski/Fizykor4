@@ -2,6 +2,7 @@ package com.clakestudio.pc.fizykor.equations
 
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableArrayList
+import com.clakestudio.pc.fizykor.R
 import com.clakestudio.pc.fizykor.SingleLiveEvent
 import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.source.EquationsRepository
@@ -16,11 +17,12 @@ class EquationsViewModel(
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     val equations: ObservableArrayList<Equation> = ObservableArrayList()
-    private val rawEquations: ArrayList<Equation> = ArrayList()
-    private var isDataLoaded = false
+    private val allEquations: ArrayList<Equation> = ArrayList()
+
     var flashCardsEvent: SingleLiveEvent<Void> = SingleLiveEvent()
-    private var currentFiltering: String = "Kinematyka"
-    private val errorMessage: String = "Wystąpił problem z załadowaniem danych "
+
+    private var isDataLoaded = false
+    lateinit var filtering: String
 
 
     fun start() {
@@ -28,26 +30,26 @@ class EquationsViewModel(
             loadData()
     }
 
-    private fun loadData() {
-        val disposable = equationsRepository.getAllEquations()
-                .subscribeOn(AppSchedulersProvider.ioScheduler())
-                .subscribe({ addEquations(it) },
-                        { addEquations(listOf(Equation(currentFiltering,  errorMessage + it.localizedMessage, ""))) })
-        compositeDisposable.add(disposable)
-    }
+    private fun loadData() = compositeDisposable.add(
+            equationsRepository.getAllEquations()
+                    .subscribeOn(AppSchedulersProvider.ioScheduler())
+                    .observeOn(AppSchedulersProvider.uiScheduler())
+                    .subscribe({ addEquations(it) },
+                            { addEquations(listOf(Equation(filtering, "Error loading data occurred" + it.localizedMessage, ""))) }
+                    ))
+
 
     private fun addEquations(equations: List<Equation>) {
-        rawEquations.clear()
-        rawEquations.addAll(equations)
+        allEquations.clear()
+        allEquations.addAll(equations)
         isDataLoaded = true
-        filterEquations(currentFiltering)
-        compositeDisposable.clear()
+        filterEquations(filtering)
     }
 
     fun filterEquations(filtering: String) {
         this.equations.clear()
-        this.equations.addAll(rawEquations.filter { equation -> equation.section == filtering })
-        currentFiltering = filtering
+        this.equations.addAll(allEquations.filter { equation -> equation.section == filtering })
+        this.filtering = filtering
 
     }
 
@@ -55,5 +57,8 @@ class EquationsViewModel(
         flashCardsEvent.call()
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
+    }
 }

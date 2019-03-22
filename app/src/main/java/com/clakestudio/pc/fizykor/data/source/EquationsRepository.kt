@@ -2,7 +2,6 @@ package com.clakestudio.pc.fizykor.data.source
 
 import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.FlashCard
-import com.clakestudio.pc.fizykor.data.source.local.flashcard.FlashCardsLocalDataSource
 import io.reactivex.Flowable
 
 class EquationsRepository(private var equationsLocalDataSource: EquationsDataSource,
@@ -30,7 +29,7 @@ class EquationsRepository(private var equationsLocalDataSource: EquationsDataSou
 
     override fun getAllFlashCards(): Flowable<List<FlashCard>> = flashCardsLocalDataSource.getAllFlashCards()
 
-    override fun selectFlashCardsWhereTitleIs(title: String): Flowable<List<FlashCard>> = flashCardsLocalDataSource.selectFlashCardsWhereTitleIs(title)
+    override fun getFlashCardsWithSectionAs(title: String): Flowable<List<FlashCard>> = flashCardsLocalDataSource.getFlashCardsWithSectionAs(title)
 
     override fun saveFlashCard(flashCard: FlashCard) = flashCardsLocalDataSource.saveFlashCard(flashCard)
 

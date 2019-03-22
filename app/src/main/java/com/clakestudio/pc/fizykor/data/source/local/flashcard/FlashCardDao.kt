@@ -14,7 +14,7 @@ interface FlashCardDao {
     fun getAllFlashCards(): Flowable<List<FlashCard>>
 
     @Query("SELECT * FROM flashcard WHERE section = :section")
-    fun selectFlashCardsWhereTitleIs(section: String) : Flowable<List<FlashCard>>
+    fun getFlashCardsWithSectionAs(section: String) : Flowable<List<FlashCard>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveFlashCard(flashCard: FlashCard)

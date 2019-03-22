@@ -9,6 +9,6 @@ interface FlashCardsDataSource {
 
     fun saveFlashCard(flashCard: FlashCard)
 
-    fun selectFlashCardsWhereTitleIs(title: String) : Flowable<List<FlashCard>>
+    fun getFlashCardsWithSectionAs(section: String) : Flowable<List<FlashCard>>
 
 }

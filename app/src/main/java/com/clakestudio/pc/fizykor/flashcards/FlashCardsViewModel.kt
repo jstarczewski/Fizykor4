@@ -18,17 +18,17 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
 
     private val minDistance = 250
 
-    var title: ObservableField<String> = ObservableField()
-    var equation: ObservableField<String> = ObservableField()
-    var visibility: ObservableField<Boolean> = ObservableField(true)
+    val title: ObservableField<String> = ObservableField()
+    val equation: ObservableField<String> = ObservableField()
+    val visibility: ObservableField<Boolean> = ObservableField(true)
 
-    var animateNewFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
-    var animatePreviousFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    val animateNewFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+    val animatePreviousFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
 
     private val compositeDisposable = CompositeDisposable()
 
-    private var flashCards: ArrayList<FlashCard> = ArrayList()
-    private var allFlashCards: ArrayList<FlashCard> = ArrayList()
+    private val flashCards: ArrayList<FlashCard> = ArrayList()
+    private val allFlashCards: ArrayList<FlashCard> = ArrayList()
     lateinit var filtering: String
 
     private var isLastOperationPush = false
@@ -47,6 +47,14 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
                 loadFlashCards(it)
             })
 
+    private fun loadFlashCards(allFlashCards: List<FlashCard>) {
+        this.allFlashCards.addAll(allFlashCards)
+        setDefaultSection()
+        setNewFlashCard()
+    }
+
+    private fun setDefaultSection() = flashCards.addAll(allFlashCards.filter { it.section == filtering })
+
     fun setSection(section: String) = flashCards.apply {
         clear()
         addAll(allFlashCards.filter { it.section == section })
@@ -55,17 +63,6 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         setNewFlashCard()
     }
 
-    private fun setDefaultSection() = flashCards.addAll(allFlashCards.filter { it.section == filtering })
-
-    private fun loadFlashCards(allFlashCards: List<FlashCard>) {
-        this.allFlashCards.addAll(allFlashCards)
-        setDefaultSection()
-        setNewFlashCard()
-    }
-
-    fun switchMathViewVisibility() {
-        if (visibility.get()!!) visibility.set(false) else visibility.set(true)
-    }
 
     private fun getRandomFlashCardIndex(): Int =
             if (isMaturaMode) Random.nextInt(flashCards.filter { it.isMatura }.size)
@@ -93,10 +90,6 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         isLastOperationPush = true
     }
 
-    private fun addToFlashCardsBackStack(index: Int) =
-            if (!isMaturaMode) flashCardsBackStack.push(flashCards[index])
-            else flashCardsBackStack.push(flashCards.filter { it.isMatura }[index])
-
     private fun setPreviousFlashCard() {
         if (!flashCardsBackStack.isEmpty()) {
             flashCardsBackStack.pop()
@@ -105,6 +98,10 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
             isLastOperationPush = false
         } else setNewFlashCard()
     }
+
+    private fun addToFlashCardsBackStack(index: Int) =
+            if (!isMaturaMode) flashCardsBackStack.push(flashCards[index])
+            else flashCardsBackStack.push(flashCards.filter { it.isMatura }[index])
 
     fun determineAnimation(x1: Float, x2: Float) {
         val delta = x2 - x1
@@ -116,6 +113,10 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
             animatePreviousFlashCardEvent.call()
         }
         visibility.set(true)
+    }
+
+    fun switchMathViewVisibility() {
+        if (visibility.get()!!) visibility.set(false) else visibility.set(true)
     }
 
     override fun onCleared() {

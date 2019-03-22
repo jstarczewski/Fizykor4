@@ -45,4 +45,5 @@
     <string name="sprawdz_swoja_wiedze_w_fiszkach">Sprawdź swoją wiedzę w fiszkach!</string>
     <string name="flashCards_navigation">Przesuń w prawo by wyświetlić nową fiszkę, przesuń w lewo by wyświetlic poprzednią, przytrzymaj aby wyświetlić odpowiedź</string>
     <string name="toast">toast</string>
+    <string name="error">Wystąpił problem z załadowaniem danych</string>
 </resources>

@@ -33,30 +33,22 @@ class EquationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equations)
+
         setSupportActionBar(toolbar)
-
-
         setupNavigationDrawer()
         setupViewFragment()
+        setupActionBar()
 
         equationsViewModel = obtainViewModel().apply {
-
-            flashCardsEvent.observe(this@EquationsActivity, Observer<Void> {
+            filtering = toolbar.title.toString()
+            flashCardsEvent.observe(this@EquationsActivity, Observer {
                 this@EquationsActivity.openFlashCards()
             })
-
-        }
-
-        setupActionBar(R.id.toolbar) {
-            setHomeAsUpIndicator(R.drawable.ic_menu)
-            title = resources.getString(R.string.kinematyka)
-            setDisplayHomeAsUpEnabled(true)
         }
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
         menuInflater.inflate(R.menu.equations, menu)
         return true
     }
@@ -99,6 +91,12 @@ class EquationsActivity : AppCompatActivity() {
             true
         }
         navigationView.menu.findItem(R.id.stale_i_przedrostki).isVisible = true
+    }
+
+    private fun setupActionBar() = setupActionBar(R.id.toolbar) {
+        setHomeAsUpIndicator(R.drawable.ic_menu)
+        title = resources.getString(R.string.kinematyka)
+        setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onBackPressed() {

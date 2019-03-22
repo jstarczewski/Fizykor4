@@ -33,7 +33,6 @@ class EquationsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewDataBinding.viewmodel?.start()
-
     }
 
     private fun setupFab() {
@@ -60,7 +59,6 @@ class EquationsFragment : Fragment() {
     companion object {
         fun newInstance() = EquationsFragment()
     }
-
 
 }
 
