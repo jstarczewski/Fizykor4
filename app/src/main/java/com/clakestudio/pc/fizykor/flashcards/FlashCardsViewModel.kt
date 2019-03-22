@@ -5,6 +5,7 @@ import android.databinding.ObservableField
 import com.clakestudio.pc.fizykor.SingleLiveEvent
 import com.clakestudio.pc.fizykor.data.FlashCard
 import com.clakestudio.pc.fizykor.data.source.EquationsRepository
+import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.util.AppSchedulersProvider
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
@@ -13,7 +14,7 @@ import kotlin.math.abs
 import kotlin.random.Random
 
 
-class FlashCardsViewModel(private val equationsRepository: EquationsRepository) : ViewModel() {
+class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository) : ViewModel() {
 
 
     private val minDistance = 250
@@ -40,7 +41,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         if (flashCards.isEmpty()) load()
     }
 
-    private fun load() = compositeDisposable.add(equationsRepository.getAllFlashCards()
+    private fun load() = compositeDisposable.add(flashCardsRepository.getAllFlashCards()
             .subscribeOn(AppSchedulersProvider.ioScheduler())
             .observeOn(AppSchedulersProvider.uiScheduler())
             .subscribe {

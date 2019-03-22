@@ -16,7 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 
 @Database(entities = arrayOf(Equation::class, FlashCard::class), version = 1)
-abstract class EquationDatabase : RoomDatabase() {
+abstract class PhysicsDatabase : RoomDatabase() {
 
 
     abstract fun equationDao(): EquationDao
@@ -24,15 +24,15 @@ abstract class EquationDatabase : RoomDatabase() {
 
     companion object {
 
-        private var INSTANCE: EquationDatabase? = null
+        private var INSTANCE: PhysicsDatabase? = null
         private var populateDisposable = CompositeDisposable()
 
         private val lock = Any()
 
-        fun getInstance(context: Context): EquationDatabase {
+        fun getInstance(context: Context): PhysicsDatabase {
             synchronized(lock) {
                 if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, EquationDatabase::class.java, "equations.db").addCallback(object : Callback() {
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, PhysicsDatabase::class.java, "equations.db").addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
 
