@@ -1,15 +1,10 @@
 package com.clakestudio.pc.fizykor.flashcards
 
-import android.animation.AnimatorInflater
-import android.animation.AnimatorSet
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.GestureDetectorCompat
 import android.view.*
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.clakestudio.pc.fizykor.R
@@ -33,7 +28,6 @@ class FlashCardsFragment : Fragment(), GestureDetector.OnGestureListener, View.O
             viewmodel = (activity as FlashCardsActivity).obtainViewModel().apply {
                 animatePreviousFlashCardEvent.observe(this@FlashCardsFragment, Observer { animatePrevious() })
                 animateNewFlashCardEvent.observe(this@FlashCardsFragment, Observer { animateNext() })
-                visibility
             }
 
         }

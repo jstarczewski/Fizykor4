@@ -13,7 +13,6 @@ import com.clakestudio.pc.fizykor.util.InfoActivity
 import com.clakestudio.pc.fizykor.util.obtainViewModel
 import com.clakestudio.pc.fizykor.util.replaceFragmentInActivity
 import com.clakestudio.pc.fizykor.util.setupActionBar
-import kotlinx.android.synthetic.main.activity_flash_cards.*
 import kotlinx.android.synthetic.main.app_bar_flash_cards.*
 
 class FlashCardsActivity : AppCompatActivity() {
@@ -62,6 +61,7 @@ class FlashCardsActivity : AppCompatActivity() {
 
             menuItem.isChecked = true
             toolbar.title = menuItem.title.toString()
+            flashCardsViewModel.setSection(menuItem.title.toString())
             drawerLayout.closeDrawers()
             true
 

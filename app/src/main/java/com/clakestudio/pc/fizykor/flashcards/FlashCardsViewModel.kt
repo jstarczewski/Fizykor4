@@ -13,11 +13,10 @@ import kotlin.math.abs
 import kotlin.random.Random
 
 
-
 class FlashCardsViewModel(private val equationsRepository: EquationsRepository) : ViewModel() {
 
 
-    private val minDistance = 200
+    private val minDistance = 250
 
     var title: ObservableField<String> = ObservableField()
     var equation: ObservableField<String> = ObservableField()
@@ -29,6 +28,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     private val compositeDisposable = CompositeDisposable()
 
     private var flashCards: ArrayList<FlashCard> = ArrayList()
+    private var allFlashCards: ArrayList<FlashCard> = ArrayList()
     lateinit var filtering: String
 
     private var isLastOperationPush = false
@@ -37,27 +37,30 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
     private val flashCardsBackStack = Stack<FlashCard>()
 
     fun start() {
-        if (flashCards.isEmpty()) filter()
+        if (flashCards.isEmpty()) load()
     }
 
-    fun load() {
+    private fun load() = compositeDisposable.add(equationsRepository.getAllFlashCards()
+            .subscribeOn(AppSchedulersProvider.ioScheduler())
+            .observeOn(AppSchedulersProvider.uiScheduler())
+            .subscribe {
+                loadFlashCards(it)
+            })
 
-    }
-
-    fun filter() {
-        val disposable = equationsRepository.selectFlashCardsWhereTitleIs(filtering)
-                .subscribeOn(AppSchedulersProvider.ioScheduler())
-                .subscribe {
-                    flashCards.addAll(it)
-                }
-        compositeDisposable.add(disposable)
-
-    }
-
-    private fun loadFlashCards(flashCards: List<FlashCard>) {
-        this.flashCards.addAll(flashCards)
+    fun setSection(section: String) = flashCards.apply {
+        clear()
+        addAll(allFlashCards.filter { it.section == section })
+    }.also {
+        switchMathViewVisibility()
         setNewFlashCard()
-        compositeDisposable.clear()
+    }
+
+    private fun setDefaultSection() = flashCards.addAll(allFlashCards.filter { it.section == filtering })
+
+    private fun loadFlashCards(allFlashCards: List<FlashCard>) {
+        this.allFlashCards.addAll(allFlashCards)
+        setDefaultSection()
+        setNewFlashCard()
     }
 
     fun switchMathViewVisibility() {
@@ -68,7 +71,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
             if (isMaturaMode) Random.nextInt(flashCards.filter { it.isMatura }.size)
             else Random.nextInt(flashCards.size)
 
-    private fun setData(index: Int) {
+    private fun setFlashCardBasedOnIndex(index: Int) {
         if (isMaturaMode) {
             this.title.set(flashCards.filter { it.isMatura }[index].title)
             this.equation.set(flashCards.filter { it.isMatura }[index].equation)
@@ -78,14 +81,14 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         }
     }
 
-    private fun setData(flashCard: FlashCard) {
+    private fun setFlashCard(flashCard: FlashCard) {
         this.title.set(flashCard.title)
         this.equation.set(flashCard.equation)
     }
 
     private fun setNewFlashCard() {
         val index = getRandomFlashCardIndex()
-        setData(index)
+        setFlashCardBasedOnIndex(index)
         addToFlashCardsBackStack(index)
         isLastOperationPush = true
     }
@@ -98,7 +101,7 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         if (!flashCardsBackStack.isEmpty()) {
             flashCardsBackStack.pop()
             if (isLastOperationPush && !flashCardsBackStack.isEmpty())
-                setData(flashCardsBackStack.pop())
+                setFlashCard(flashCardsBackStack.pop())
             isLastOperationPush = false
         } else setNewFlashCard()
     }
@@ -115,5 +118,8 @@ class FlashCardsViewModel(private val equationsRepository: EquationsRepository) 
         visibility.set(true)
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
+    }
 }
