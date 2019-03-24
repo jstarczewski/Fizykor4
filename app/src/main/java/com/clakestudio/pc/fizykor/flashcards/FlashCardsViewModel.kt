@@ -4,7 +4,6 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.clakestudio.pc.fizykor.SingleLiveEvent
 import com.clakestudio.pc.fizykor.data.FlashCard
-import com.clakestudio.pc.fizykor.data.source.EquationsRepository
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.util.AppSchedulersProvider
 import io.reactivex.disposables.CompositeDisposable

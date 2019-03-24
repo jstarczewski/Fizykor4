@@ -7,7 +7,8 @@ object DataProvider {
 
     fun provideEquations(): List<Equation> {
 
-        return listOf<Equation>(Equation("Kinematyka", "Ruch jednostajny", "$   {v↖{→}={∆s}/t [m/s]}$   <br> $   {v↖{→}}$   prędkość, $  ∆s$   przemieszczenie/przebyta droga, $   t$   czas"),
+        return listOf<Equation>(
+                Equation("Kinematyka", "Ruch jednostajny", "$   {v↖{→}={∆s}/t [m/s]}$   <br> $   {v↖{→}}$   prędkość, $  ∆s$   przemieszczenie/przebyta droga, $   t$   czas"),
                 Equation("Kinematyka", "Ruch jednostajny zmienny", "$   {v↖{→}=v_0+at [m/s]}$   ,  $  a↖{→}={∆v}/t [m/s^2]$   <br> $   {v↖{→}}$   prędkość, $   v_0$   prędkość początkowa, $   a↖{→}$   przyśpieszenie, $   t$   czas, dla $   a↖{→}>0$   ruch jednostajnie przyśpieszony, dla $   a↖{→}<0$   ruch jednostajnie opóźniony"),
                 Equation("Kinematyka", "Droga w ruchu jednostajnie zmiennym", "$   s = v_0t +↙{-} {at^2}/2$   $  [m]$  ,  $   s = {v_0 + v_k}/2 t$  ,  $   s = {v_k^2-v_0^2}/{2a}$   <br> $   s$   droga , $   a↖{→}$   przyśpieszenie, $   t$   czas, $   v_k$   prędkość końcowa, $   v_0$   prędkość początkowa <br> $   s_1:s_2:s_3 ..s_n = 1:3:5..n$   <br> Drogi przebyte przez ciało w ruchu jednostajnie przyśpieszonym bez prędkości początkowej mają się do siebie jak kolejne liczby nieparzyste."),
                 Equation("Kinematyka", "Równania ruchu", "$   {v↖{→}}(t),=v_0+↙{-}at$   $  [m/s]$   <br> $   {v(t),}$   prędkość od czasu, $   {a↖{→}}$   przyśpieszenie, $   t$   czas <br> $   {x(t),}=x_0+s$   $   {[m]}$   <br> $   {x(t),}$   położenie od czasu, $   x_0$   położenie początkowe, w miejsce $   {s}$   wstawiamy wzór na drogę w zależności od ruchu jakim porusza się rozpatrywane ciało"),

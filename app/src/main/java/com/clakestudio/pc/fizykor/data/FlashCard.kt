@@ -12,5 +12,5 @@ data class FlashCard @JvmOverloads constructor (
         @ColumnInfo(name = "ismatura") var isMatura: Boolean = false,
         @ColumnInfo(name = "title") var title: String = "",
         @ColumnInfo(name = "equation") var equation: String = "",
-        @PrimaryKey @ColumnInfo(name = "entryid") var entryid: String = UUID.randomUUID().toString()
+        @PrimaryKey @ColumnInfo(name = "id") var id: String = UUID.randomUUID().toString()
 )
