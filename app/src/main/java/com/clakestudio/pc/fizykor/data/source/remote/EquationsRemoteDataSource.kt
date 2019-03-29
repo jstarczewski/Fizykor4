@@ -7,6 +7,7 @@ import io.reactivex.Flowable
 class EquationsRemoteDataSource(private val fizykorAPI: FizykorAPI) : EquationsDataSource{
 
     override fun getAllEquations(): Flowable<List<Equation>> = fizykorAPI.getAllEquations()
+            .flatMapPublisher { response -> return@flatMapPublisher Flowable.just(response.body()) }
 
     override fun getAllEquationsFromSection(section: String): Flowable<List<Equation>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

@@ -2,30 +2,17 @@ package com.clakestudio.pc.fizykor.data.source.remote
 
 import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.FlashCard
-import io.reactivex.Flowable
+import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 
 class FizykorAPI(retrofit: Retrofit) {
 
-    private val fizykorService: FizykorService
+    private val fizykorService: FizykorService = retrofit.create(FizykorService::class.java)
 
-    private interface FizykorService {
+    fun getAllFlashCards(): Single<Response<List<FlashCard>>> = fizykorService.getFlashCards()
 
-        @GET(URLManager.flashcards)
-        fun getFlashCards(): Flowable<List<FlashCard>>
-
-        @GET(URLManager.equations)
-        fun getEquations(): Flowable<List<Equation>>
-
-    }
-
-    init {
-        fizykorService = retrofit.create(FizykorService::class.java)
-    }
-
-    fun getAllFlashCards(): Flowable<List<FlashCard>> = fizykorService.getFlashCards()
-
-    fun getAllEquations(): Flowable<List<Equation>> = fizykorService.getEquations()
+    fun getAllEquations(): Single<Response<List<Equation>>> = fizykorService.getEquations()
 
 }
