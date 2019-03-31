@@ -15,11 +15,13 @@ Third version of my most popular app relesed in Google Play Store back in 2016 n
 - [x] Room persistance Library
 - [x] DataBinding library
 - [x] RxJava | RxAndroid
+- [x] Retrofit
+- [x] Firebase database
 - [x] MathView (my own third party view library for kotlin)
 ## Future of Fizykor
 I set myself a goal to publish Fizykor in 2018. Now app is working, but there are several issues that I will add and then solve. The biggest problem is the amount of memory app needs. In the nearest furure I would like to:  
-- [ ] Make Fizykor fragmentless
-- [ ] Add remote Firebase database to sync equations
+- [x] Add remote Firebase database to sync data
+- [x] Add Retrofit to query data from remote API
 - [ ] Refactor animations to provide better user experience
 - [ ] Test the app with Espresso, JUnit and Mockito
 
