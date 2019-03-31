@@ -27,8 +27,9 @@ class FlashCardsRepository(private val flashCardsLocalDataSource: FlashCardsData
     private fun performUpdate(): Disposable =
             flashCardsRemoteDataSource.getAllFlashCards()
                     .subscribeOn(AppSchedulersProvider.ioScheduler())
+                    .observeOn(AppSchedulersProvider.uiScheduler())
                     .forEach {
-                        it.forEach { flashCard -> flashCardsRemoteDataSource.saveFlashCard(flashCard) }
+                        it.forEach { flashCard -> flashCardsLocalDataSource.saveFlashCard(flashCard) }
                     }
 
 

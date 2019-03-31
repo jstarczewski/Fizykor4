@@ -38,8 +38,8 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
 
     fun start() {
         if (flashCards.isEmpty()) {
-            load()
             performUpdateIfNeeded()
+            load()
         }
     }
 
@@ -54,8 +54,10 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
 
     private fun loadFlashCards(allFlashCards: List<FlashCard>) {
         this.allFlashCards.addAll(allFlashCards)
-        setDefaultSection()
-        setNewFlashCard()
+        if (allFlashCards.isNotEmpty()) {
+            setDefaultSection()
+            setNewFlashCard()
+        }
     }
 
     private fun setDefaultSection() = flashCards.addAll(allFlashCards.filter { it.section == filtering })

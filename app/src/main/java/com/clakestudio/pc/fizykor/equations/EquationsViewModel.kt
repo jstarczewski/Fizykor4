@@ -27,8 +27,8 @@ class EquationsViewModel(
 
     fun start() {
         if (!isDataLoaded) {
-            loadData()
             performUpdateIfNeeded()
+            loadData()
         }
     }
 
