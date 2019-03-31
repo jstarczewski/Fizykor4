@@ -16,7 +16,7 @@ class FlashCardsRemoteDataSource(private val fizykorAPI: FizykorAPI) : FlashCard
     override fun getAllFlashCards(): Flowable<List<FlashCard>> = fizykorAPI.getAllFlashCards()
             .flatMapPublisher { response ->
                 if (response.isSuccessful) return@flatMapPublisher Flowable.just(response.body())
-                else return@flatMapPublisher Flowable.just(response.body())
+                else return@flatMapPublisher Flowable.just(listOf(FlashCard("Error", false, "Nie udało się uzyskać danych", "")))
             }
 
     override fun saveFlashCard(flashCard: FlashCard) {

@@ -4,10 +4,14 @@ import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.source.EquationsDataSource
 import io.reactivex.Flowable
 
-class EquationsRemoteDataSource(private val fizykorAPI: FizykorAPI) : EquationsDataSource{
+class EquationsRemoteDataSource(private val fizykorAPI: FizykorAPI) : EquationsDataSource {
 
     override fun getAllEquations(): Flowable<List<Equation>> = fizykorAPI.getAllEquations()
-            .flatMapPublisher { response -> return@flatMapPublisher Flowable.just(response.body()) }
+            .flatMapPublisher { response ->
+                if (response.isSuccessful)
+                    return@flatMapPublisher Flowable.just(response.body())
+                else return@flatMapPublisher Flowable.just(listOf(Equation("Error", "Nie udało się uzyskać danych", response.errorBody().toString() )))
+            }
 
     override fun getAllEquationsFromSection(section: String): Flowable<List<Equation>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

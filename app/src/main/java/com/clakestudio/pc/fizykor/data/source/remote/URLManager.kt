@@ -5,7 +5,7 @@ object URLManager {
     /**
      * Base when App is running on localhost
      * */
-    const val base = "http://127.0.0.1:8080"
+    const val base = ""
     const val flashcards = "flashcards"
     const val equations = "equations"
 
