@@ -66,3 +66,5 @@ fastlane/readme.md
 
 URLManager.kt
 
+app/src/main/java/com/clakestudio/pc/fizykor/data/source/remote/api/URLManager.kt
+
