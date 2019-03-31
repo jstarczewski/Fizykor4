@@ -2,6 +2,7 @@ package com.clakestudio.pc.fizykor.data.source.remote
 
 import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.source.EquationsDataSource
+import com.clakestudio.pc.fizykor.data.source.remote.api.FizykorAPI
 import io.reactivex.Flowable
 
 class EquationsRemoteDataSource(private val fizykorAPI: FizykorAPI) : EquationsDataSource {

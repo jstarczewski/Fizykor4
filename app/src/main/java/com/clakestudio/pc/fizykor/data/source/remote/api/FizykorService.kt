@@ -1,4 +1,4 @@
-package com.clakestudio.pc.fizykor.data.source.remote
+package com.clakestudio.pc.fizykor.data.source.remote.api
 
 import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.FlashCard

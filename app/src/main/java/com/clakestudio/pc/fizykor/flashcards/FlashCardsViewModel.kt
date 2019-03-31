@@ -37,7 +37,10 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
     private val flashCardsBackStack = Stack<FlashCard>()
 
     fun start() {
-        if (flashCards.isEmpty()) load()
+        if (flashCards.isEmpty()) {
+            performUpdateIfNeeded()
+            load()
+        }
     }
 
     private fun load() = compositeDisposable.add(flashCardsRepository.getAllFlashCards()
@@ -47,10 +50,14 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
                 loadFlashCards(it)
             })
 
+    private fun performUpdateIfNeeded() = flashCardsRepository.performUpdateIfNeeded(compositeDisposable)
+
     private fun loadFlashCards(allFlashCards: List<FlashCard>) {
         this.allFlashCards.addAll(allFlashCards)
-        setDefaultSection()
-        setNewFlashCard()
+        if (allFlashCards.isNotEmpty()) {
+            setDefaultSection()
+            setNewFlashCard()
+        }
     }
 
     private fun setDefaultSection() = flashCards.addAll(allFlashCards.filter { it.section == filtering })

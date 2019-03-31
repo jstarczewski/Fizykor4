@@ -2,12 +2,8 @@ package com.clakestudio.pc.fizykor.data.source.remote
 
 import com.clakestudio.pc.fizykor.data.FlashCard
 import com.clakestudio.pc.fizykor.data.source.FlashCardsDataSource
-import com.clakestudio.pc.fizykor.util.AppSchedulersProvider
+import com.clakestudio.pc.fizykor.data.source.remote.api.FizykorAPI
 import io.reactivex.Flowable
-import io.reactivex.Single
-import io.reactivex.SingleSource
-import org.reactivestreams.Publisher
-import retrofit2.Response
 
 class FlashCardsRemoteDataSource(private val fizykorAPI: FizykorAPI) : FlashCardsDataSource {
 

@@ -65,5 +65,5 @@ fastlane/test_output
 fastlane/readme.md
 
 
-app/src/main/java/com/clakestudio/pc/fizykor/data/source/remote/URLManager.kt
+app/src/main/java/com/clakestudio/pc/fizykor/data/source/remote/api/URLManager.kt
 
