@@ -1,29 +1,34 @@
 package com.clakestudio.pc.fizykor.data.source
 
 import com.clakestudio.pc.fizykor.data.Equation
-import com.clakestudio.pc.fizykor.data.FlashCard
 import com.clakestudio.pc.fizykor.data.source.remote.EquationsRemoteDataSource
 import com.clakestudio.pc.fizykor.data.source.remote.firebase.FirebaseService
+import com.clakestudio.pc.fizykor.util.AppSchedulersProvider
 import io.reactivex.Flowable
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 class EquationsRepository(private var equationsLocalDataSource: EquationsDataSource,
                           private var equationsRemoteDataSource: EquationsRemoteDataSource,
                           private var firebaseService: FirebaseService
 ) : EquationsDataSource {
-
+    
     override fun getAllEquations(): Flowable<List<Equation>> = equationsLocalDataSource.getAllEquations()
 
     override fun getAllEquationsFromSection(section: String): Flowable<List<Equation>> = equationsLocalDataSource.getAllEquationsFromSection(section)
 
     override fun saveEquation(equation: Equation) = equationsLocalDataSource.saveEquation(equation)
 
-    fun performUpdateIfNeeded() = firebaseService.isUpdateNeeded { if (it) performUpdate() }
-
-    private fun performUpdate() {
-        equationsRemoteDataSource.getAllEquations().forEach {
-            it.forEach { equationsLocalDataSource.saveEquation(it) }
-        }.dispose()
+    fun performUpdateIfNeeded(compositeDisposable: CompositeDisposable) {
+        return firebaseService.isUpdateNeeded { if (it) compositeDisposable.add(performUpdate()) }
     }
+
+    private fun performUpdate(): Disposable =
+            equationsRemoteDataSource.getAllEquations()
+                    .subscribeOn(AppSchedulersProvider.ioScheduler())
+                    .forEach {
+                        it.forEach { equations -> equationsLocalDataSource.saveEquation(equations) }
+                    }
 
     companion object {
 

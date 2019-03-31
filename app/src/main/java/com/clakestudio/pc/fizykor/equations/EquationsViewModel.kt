@@ -26,8 +26,10 @@ class EquationsViewModel(
 
 
     fun start() {
-        if (!isDataLoaded)
+        if (!isDataLoaded) {
             loadData()
+            performUpdateIfNeeded()
+        }
     }
 
     private fun loadData() = compositeDisposable.add(
@@ -37,6 +39,8 @@ class EquationsViewModel(
                     .subscribe({ addEquations(it) },
                             { addEquations(listOf(Equation(filtering, "Error loading data occurred" + it.localizedMessage, ""))) }
                     ))
+
+    private fun performUpdateIfNeeded() = equationsRepository.performUpdateIfNeeded(compositeDisposable)
 
 
     private fun addEquations(equations: List<Equation>) {

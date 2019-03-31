@@ -37,11 +37,11 @@ abstract class PhysicsDatabase : RoomDatabase() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
 
-                            populateDisposable.add(Single.fromCallable {
+                   /*         populateDisposable.add(Single.fromCallable {
                                 getInstance(context).equationDao().insertAllEquations(*(DataProvider.provideEquations()).toTypedArray())
                                 getInstance(context).flashCardDao().saveAllFlashCards(*(DataProvider.provideFlashCards()).toTypedArray())
                             }.subscribeOn(AppSchedulersProvider.ioScheduler()).observeOn(AppSchedulersProvider.uiScheduler()).subscribe())
-
+*/
                         }
                     })
                             .build()
