@@ -8,11 +8,11 @@ import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-class EquationsRepository(private var equationsLocalDataSource: EquationsDataSource,
-                          private var equationsRemoteDataSource: EquationsRemoteDataSource,
-                          private var firebaseService: FirebaseService
+class EquationsRepository(private val equationsLocalDataSource: EquationsDataSource,
+                          private val equationsRemoteDataSource: EquationsRemoteDataSource,
+                          private val firebaseService: FirebaseService
 ) : EquationsDataSource {
-    
+
     override fun getAllEquations(): Flowable<List<Equation>> = equationsLocalDataSource.getAllEquations()
 
     override fun getAllEquationsFromSection(section: String): Flowable<List<Equation>> = equationsLocalDataSource.getAllEquationsFromSection(section)

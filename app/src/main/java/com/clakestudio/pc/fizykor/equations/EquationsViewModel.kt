@@ -42,7 +42,6 @@ class EquationsViewModel(
 
     private fun performUpdateIfNeeded() = equationsRepository.performUpdateIfNeeded(compositeDisposable)
 
-
     private fun addEquations(equations: List<Equation>) {
         allEquations.clear()
         allEquations.addAll(equations)
