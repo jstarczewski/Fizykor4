@@ -13,9 +13,6 @@ bin/
 gen/
 out/
 
-# Windows Vim swp files
-*.*~
-
 # Gradle files
 .gradle/
 build/
