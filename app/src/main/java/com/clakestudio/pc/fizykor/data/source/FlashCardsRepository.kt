@@ -8,7 +8,7 @@ class FlashCardsRepository(private var flashCardsLocalDataSource: FlashCardsData
 
     override fun getAllFlashCards(): Flowable<List<FlashCard>> = flashCardsLocalDataSource.getAllFlashCards()
 
-    override fun getFlashCardsWithSectionAs(title: String): Flowable<List<FlashCard>> = flashCardsLocalDataSource.getFlashCardsWithSectionAs(title)
+    override fun getFlashCardsWithSectionAs(section: String): Flowable<List<FlashCard>> = flashCardsLocalDataSource.getFlashCardsWithSectionAs(section)
 
     override fun saveFlashCard(flashCard: FlashCard) = flashCardsLocalDataSource.saveFlashCard(flashCard)
 

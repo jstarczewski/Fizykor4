@@ -1,7 +1,8 @@
-package com.clakestudio.pc.fizykor.data.source.remote
+package com.clakestudio.pc.fizykor.data.source.remote.api
 
 import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.data.FlashCard
+import com.clakestudio.pc.fizykor.data.source.remote.URLManager
 import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET

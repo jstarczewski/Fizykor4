@@ -4,10 +4,9 @@ import android.content.Context
 import com.clakestudio.pc.fizykor.data.source.EquationsRepository
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.data.source.local.PhysicsDatabase
-import com.clakestudio.pc.fizykor.data.source.local.equation.EquationsLocalDataSource
 import com.clakestudio.pc.fizykor.data.source.local.flashcard.FlashCardsLocalDataSource
 import com.clakestudio.pc.fizykor.data.source.remote.EquationsRemoteDataSource
-import com.clakestudio.pc.fizykor.data.source.remote.FizykorAPI
+import com.clakestudio.pc.fizykor.data.source.remote.api.FizykorAPI
 import com.clakestudio.pc.fizykor.data.source.remote.URLManager
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
