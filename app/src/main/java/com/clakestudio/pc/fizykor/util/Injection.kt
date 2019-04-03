@@ -1,6 +1,8 @@
 package com.clakestudio.pc.fizykor.util
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import com.clakestudio.pc.fizykor.data.source.EquationsRepository
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.data.source.local.PhysicsDatabase
@@ -34,6 +36,8 @@ object Injection {
                     FlashCardsRemoteDataSource.getInstance(FizykorAPI(provideRetrofit())),
                     FirebaseService.getInstance(context)
             )
+
+    fun provideSharedPreferencesProvider(context: Context) : SharedPreferencesProvider = SharedPreferencesProvider(PreferenceManager.getDefaultSharedPreferences(context))
 
 
     private fun provideRetrofit() =

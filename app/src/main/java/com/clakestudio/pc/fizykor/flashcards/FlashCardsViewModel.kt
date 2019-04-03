@@ -6,6 +6,7 @@ import com.clakestudio.pc.fizykor.SingleLiveEvent
 import com.clakestudio.pc.fizykor.data.FlashCard
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.util.AppSchedulersProvider
+import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 import kotlin.collections.ArrayList
@@ -13,7 +14,10 @@ import kotlin.math.abs
 import kotlin.random.Random
 
 
-class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository) : ViewModel() {
+class FlashCardsViewModel(
+        private val flashCardsRepository: FlashCardsRepository,
+        private val sharedPreferencesProvider: SharedPreferencesProvider
+) : ViewModel() {
 
 
     private val minDistance = 250
@@ -24,6 +28,8 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
 
     val animateNewFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
     val animatePreviousFlashCardEvent: SingleLiveEvent<Unit> = SingleLiveEvent()
+
+    val navigationToast: SingleLiveEvent<Unit> = SingleLiveEvent()
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -40,6 +46,7 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
         if (flashCards.isEmpty()) {
             performUpdateIfNeeded()
             load()
+            triggerInfoToast()
         }
     }
 
@@ -58,6 +65,11 @@ class FlashCardsViewModel(private val flashCardsRepository: FlashCardsRepository
             setDefaultSection()
             setNewFlashCard()
         }
+    }
+
+    private fun triggerInfoToast() {
+        if (!sharedPreferencesProvider.wasNavigationToastShowed())
+            navigationToast.call()
     }
 
     private fun setDefaultSection() = flashCards.addAll(allFlashCards.filter { it.section == filtering })

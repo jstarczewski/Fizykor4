@@ -8,10 +8,12 @@ import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.equations.EquationsViewModel
 import com.clakestudio.pc.fizykor.flashcards.FlashCardsViewModel
 import com.clakestudio.pc.fizykor.util.Injection
+import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
 
 class ViewModelFactory private constructor(
         private val equationsRepository: EquationsRepository,
-        private val flashCardsRepository: FlashCardsRepository
+        private val flashCardsRepository: FlashCardsRepository,
+        private val sharedPreferencesProvider: SharedPreferencesProvider
 ) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =
@@ -20,7 +22,7 @@ class ViewModelFactory private constructor(
                     isAssignableFrom(EquationsViewModel::class.java) ->
                         EquationsViewModel(equationsRepository)
                     isAssignableFrom(FlashCardsViewModel::class.java) ->
-                        FlashCardsViewModel(flashCardsRepository)
+                        FlashCardsViewModel(flashCardsRepository, sharedPreferencesProvider)
 
                     else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
@@ -38,7 +40,8 @@ class ViewModelFactory private constructor(
 
                     INSTANCE
                             ?: ViewModelFactory(Injection.provideEquationsRepository(application.applicationContext),
-                                    Injection.provideFlashCardsRepository(application.applicationContext)).also { INSTANCE = it }
+                                    Injection.provideFlashCardsRepository(application.applicationContext),
+                                    Injection.provideSharedPreferencesProvider(application.applicationContext)).also { INSTANCE = it }
 
                 }
 
