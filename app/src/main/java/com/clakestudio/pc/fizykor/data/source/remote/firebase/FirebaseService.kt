@@ -1,6 +1,5 @@
 package com.clakestudio.pc.fizykor.data.source.remote.firebase
 
-import android.content.Context
 import com.google.firebase.database.*
 
 class FirebaseService(private val reference: DatabaseReference) {
@@ -17,14 +16,17 @@ class FirebaseService(private val reference: DatabaseReference) {
         })
     }
 
+
     companion object {
 
         private var INSTANCE: FirebaseService? = null
 
-        fun getInstance(context: Context): FirebaseService {
+        fun getInstance(): FirebaseService {
             if (INSTANCE == null) {
                 synchronized(FirebaseService::class.java) {
-                    INSTANCE = FirebaseService(FirebaseDatabase.getInstance().getReference("update")).also {
+                    INSTANCE = FirebaseService(FirebaseDatabase.getInstance().apply {
+                        setPersistenceEnabled(true)
+                    }.getReference("update")).also {
                         INSTANCE = it
                     }
                 }

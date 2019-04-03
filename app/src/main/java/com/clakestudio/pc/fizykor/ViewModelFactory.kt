@@ -10,6 +10,7 @@ import com.clakestudio.pc.fizykor.flashcards.FlashCardsViewModel
 import com.clakestudio.pc.fizykor.util.Injection
 import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory private constructor(
         private val equationsRepository: EquationsRepository,
         private val flashCardsRepository: FlashCardsRepository,
@@ -26,7 +27,6 @@ class ViewModelFactory private constructor(
 
                     else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }
-                // Unchecked cast
             } as T
 
 
