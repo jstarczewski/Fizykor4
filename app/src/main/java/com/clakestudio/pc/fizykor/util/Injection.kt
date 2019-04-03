@@ -13,9 +13,12 @@ import com.clakestudio.pc.fizykor.data.source.remote.api.FizykorAPI
 import com.clakestudio.pc.fizykor.data.source.remote.api.URLManager
 import com.clakestudio.pc.fizykor.data.source.remote.firebase.FirebaseService
 import com.clakestudio.pc.fizykor.util.sharedprefs.SharedPreferencesProvider
+import okhttp3.OkHttpClient
+import okhttp3.internal.tls.OkHostnameVerifier
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object Injection {
 
@@ -40,11 +43,25 @@ object Injection {
     fun provideSharedPreferencesProvider(context: Context): SharedPreferencesProvider = SharedPreferencesProvider(PreferenceManager.getDefaultSharedPreferences(context))
 
 
-    private fun provideRetrofit() =
-            Retrofit.Builder()
-                    .baseUrl(URLManager.base)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build()
+    private fun provideRetrofit(): Retrofit {
+
+        val okHttpClient = OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true)
+                .build()
+
+
+        return Retrofit.Builder()
+                .client(okHttpClient)
+                .baseUrl(URLManager.base)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+
+
+    }
+
 
 }
