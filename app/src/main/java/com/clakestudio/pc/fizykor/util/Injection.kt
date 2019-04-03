@@ -14,7 +14,6 @@ import com.clakestudio.pc.fizykor.data.source.remote.api.URLManager
 import com.clakestudio.pc.fizykor.data.source.remote.firebase.FirebaseService
 import com.clakestudio.pc.fizykor.util.sharedprefs.SharedPreferencesProvider
 import okhttp3.OkHttpClient
-import okhttp3.internal.tls.OkHostnameVerifier
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
