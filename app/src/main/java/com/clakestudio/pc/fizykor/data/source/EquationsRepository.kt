@@ -27,7 +27,7 @@ class EquationsRepository(private val equationsLocalDataSource: EquationsDataSou
             equationsRemoteDataSource.getAllEquations()
                     .subscribeOn(AppSchedulersProvider.ioScheduler())
                     .observeOn(AppSchedulersProvider.uiScheduler())
-                    .forEach {
+                    .subscribe {
                         it.forEach { equations -> equationsLocalDataSource.saveEquation(equations) }
                     }
 

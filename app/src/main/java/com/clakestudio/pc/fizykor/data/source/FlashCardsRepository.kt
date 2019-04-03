@@ -28,7 +28,7 @@ class FlashCardsRepository(private val flashCardsLocalDataSource: FlashCardsData
             flashCardsRemoteDataSource.getAllFlashCards()
                     .subscribeOn(AppSchedulersProvider.ioScheduler())
                     .observeOn(AppSchedulersProvider.uiScheduler())
-                    .forEach {
+                    .subscribe {
                         it.forEach { flashCard -> flashCardsLocalDataSource.saveFlashCard(flashCard) }
                     }
 
