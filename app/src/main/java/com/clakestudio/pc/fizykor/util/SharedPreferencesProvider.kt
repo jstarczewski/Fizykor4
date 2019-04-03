@@ -7,6 +7,10 @@ class SharedPreferencesProvider(private val sharedPreferences: SharedPreferences
 
     fun wasNavigationToastShowed(): Boolean = sharedPreferences.contains("toast")
 
+    fun isUpdateNeeded(dataVersion : Int) : Boolean = sharedPreferences.getInt("dataVersion", 0) < dataVersion
+
+    fun saveDataVersion(dataVersion: Int) = sharedPreferences.edit().putInt("dataVersion", dataVersion).apply()
+
     companion object {
 
         private var INSTANCE: SharedPreferencesProvider? = null

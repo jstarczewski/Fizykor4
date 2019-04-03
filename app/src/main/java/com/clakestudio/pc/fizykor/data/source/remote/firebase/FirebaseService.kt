@@ -1,8 +1,10 @@
 package com.clakestudio.pc.fizykor.data.source.remote.firebase
 
+import android.util.Log
+import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
 import com.google.firebase.database.*
 
-class FirebaseService(private val reference: DatabaseReference) {
+class FirebaseService(private val reference: DatabaseReference, private val sharedPreferencesProvider: SharedPreferencesProvider) {
 
     fun isUpdateNeeded(isNeeded: (Boolean) -> (Unit)) {
         reference.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -11,7 +13,13 @@ class FirebaseService(private val reference: DatabaseReference) {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                isNeeded(p0.value as Boolean)
+                val value = p0.value.toString().toInt()
+                if (sharedPreferencesProvider.isUpdateNeeded(value)) {
+                    sharedPreferencesProvider.saveDataVersion(value)
+                    isNeeded(true)
+                    Log.e("Value", (value).toString())
+                }
+                isNeeded(false)
             }
         })
     }
@@ -21,12 +29,12 @@ class FirebaseService(private val reference: DatabaseReference) {
 
         private var INSTANCE: FirebaseService? = null
 
-        fun getInstance(): FirebaseService {
+        fun getInstance(sharedPreferencesProvider: SharedPreferencesProvider): FirebaseService {
             if (INSTANCE == null) {
                 synchronized(FirebaseService::class.java) {
-                    INSTANCE = FirebaseService(FirebaseDatabase.getInstance().apply {
-                        setPersistenceEnabled(true)
-                    }.getReference("update")).also {
+                    INSTANCE = FirebaseService(FirebaseDatabase.getInstance().getReference("update"),
+                            sharedPreferencesProvider
+                    ).also {
                         INSTANCE = it
                     }
                 }

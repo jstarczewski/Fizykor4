@@ -26,7 +26,7 @@ object Injection {
             .getInstance(
                     EquationsLocalDataSource.getInstance(PhysicsDatabase.getInstance(context).equationDao()),
                     EquationsRemoteDataSource.getInstance(FizykorAPI(provideRetrofit())),
-                    FirebaseService.getInstance(context)
+                    FirebaseService.getInstance(provideSharedPreferencesProvider(context))
             )
 
 
@@ -34,10 +34,10 @@ object Injection {
             .getInstance(
                     FlashCardsLocalDataSource.getInstance(PhysicsDatabase.getInstance(context).flashCardDao()),
                     FlashCardsRemoteDataSource.getInstance(FizykorAPI(provideRetrofit())),
-                    FirebaseService.getInstance(context)
+                    FirebaseService.getInstance(provideSharedPreferencesProvider(context))
             )
 
-    fun provideSharedPreferencesProvider(context: Context) : SharedPreferencesProvider = SharedPreferencesProvider(PreferenceManager.getDefaultSharedPreferences(context))
+    fun provideSharedPreferencesProvider(context: Context): SharedPreferencesProvider = SharedPreferencesProvider(PreferenceManager.getDefaultSharedPreferences(context))
 
 
     private fun provideRetrofit() =
