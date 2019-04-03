@@ -1,10 +1,11 @@
 package com.clakestudio.pc.fizykor.data.source.remote.firebase
 
 import android.util.Log
-import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
+import com.clakestudio.pc.fizykor.util.sharedprefs.FirebaseSharedPreferences
+import com.clakestudio.pc.fizykor.util.sharedprefs.SharedPreferencesProvider
 import com.google.firebase.database.*
 
-class FirebaseService(private val reference: DatabaseReference, private val sharedPreferencesProvider: SharedPreferencesProvider) {
+class FirebaseService(private val reference: DatabaseReference, private val sharedPreferencesProvider: FirebaseSharedPreferences) {
 
     fun isUpdateNeeded(isNeeded: (Boolean) -> (Unit)) {
         reference.addListenerForSingleValueEvent(object : ValueEventListener {

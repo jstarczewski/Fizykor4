@@ -1,7 +1,6 @@
 package com.clakestudio.pc.fizykor.util
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.clakestudio.pc.fizykor.data.source.EquationsRepository
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
@@ -13,6 +12,7 @@ import com.clakestudio.pc.fizykor.data.source.remote.FlashCardsRemoteDataSource
 import com.clakestudio.pc.fizykor.data.source.remote.api.FizykorAPI
 import com.clakestudio.pc.fizykor.data.source.remote.api.URLManager
 import com.clakestudio.pc.fizykor.data.source.remote.firebase.FirebaseService
+import com.clakestudio.pc.fizykor.util.sharedprefs.SharedPreferencesProvider
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

@@ -8,7 +8,7 @@ import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.equations.EquationsViewModel
 import com.clakestudio.pc.fizykor.flashcards.FlashCardsViewModel
 import com.clakestudio.pc.fizykor.util.Injection
-import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
+import com.clakestudio.pc.fizykor.util.sharedprefs.SharedPreferencesProvider
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory private constructor(

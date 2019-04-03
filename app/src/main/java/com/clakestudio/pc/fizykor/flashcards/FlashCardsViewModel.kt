@@ -6,7 +6,7 @@ import com.clakestudio.pc.fizykor.SingleLiveEvent
 import com.clakestudio.pc.fizykor.data.FlashCard
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.util.AppSchedulersProvider
-import com.clakestudio.pc.fizykor.util.SharedPreferencesProvider
+import com.clakestudio.pc.fizykor.util.sharedprefs.ViewSharedPreferences
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 import kotlin.collections.ArrayList
@@ -16,7 +16,7 @@ import kotlin.random.Random
 
 class FlashCardsViewModel(
         private val flashCardsRepository: FlashCardsRepository,
-        private val sharedPreferencesProvider: SharedPreferencesProvider
+        private val sharedPreferencesProvider: ViewSharedPreferences
 ) : ViewModel() {
 
 
