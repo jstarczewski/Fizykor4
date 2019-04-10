@@ -1,7 +1,7 @@
 package com.clakestudio.pc.fizykor.equations
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableArrayList
+import androidx.lifecycle.ViewModel
+import androidx.databinding.ObservableArrayList
 import com.clakestudio.pc.fizykor.R
 import com.clakestudio.pc.fizykor.SingleLiveEvent
 import com.clakestudio.pc.fizykor.data.Equation

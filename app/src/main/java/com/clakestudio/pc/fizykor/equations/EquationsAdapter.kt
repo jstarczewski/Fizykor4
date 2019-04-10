@@ -1,7 +1,7 @@
 package com.clakestudio.pc.fizykor.equations
 
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +10,9 @@ import com.clakestudio.pc.fizykor.data.Equation
 import com.clakestudio.pc.fizykor.databinding.MultiEquationBinding
 import com.jstarczewski.pc.mathview.src.MathView
 
-class EquationsAdapter(private var equations: ArrayList<List<Equation>>) : RecyclerView.Adapter<EquationsAdapter.ViewHolder>() {
+class EquationsAdapter(private var equations: ArrayList<List<Equation>>) : androidx.recyclerview.widget.RecyclerView.Adapter<EquationsAdapter.ViewHolder>() {
 
-    class ViewHolder(binding: MultiEquationBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(binding: MultiEquationBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         /**
          * This Multi Equation Binding pattern as a RecyclerView object is based on Spaghetti Code design pattern and was the only
@@ -29,7 +29,7 @@ class EquationsAdapter(private var equations: ArrayList<List<Equation>>) : Recyc
                 updateData(textViews[x], mathViews[x], cardViews[x], equationsList[x])
         }
 
-        private fun updateData(tv: TextView, mv: MathView, cv: CardView, equation: Equation) {
+        private fun updateData(tv: TextView, mv: MathView, cv: androidx.cardview.widget.CardView, equation: Equation) {
             if (equation.title.isEmpty()) cv.visibility = View.GONE
             else tv.text = equation.title; mv.text = equation.equation
         }

@@ -1,6 +1,6 @@
 package com.clakestudio.pc.fizykor.util
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.clakestudio.pc.fizykor.R
 

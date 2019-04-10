@@ -1,8 +1,8 @@
 package com.clakestudio.pc.fizykor
 
 import android.app.Application
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.clakestudio.pc.fizykor.data.source.EquationsRepository
 import com.clakestudio.pc.fizykor.data.source.FlashCardsRepository
 import com.clakestudio.pc.fizykor.equations.EquationsViewModel

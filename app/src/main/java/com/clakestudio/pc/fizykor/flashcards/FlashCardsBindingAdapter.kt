@@ -1,6 +1,6 @@
 package com.clakestudio.pc.fizykor.flashcards
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.view.View
 
 object FlashCardsBindingAdapter {

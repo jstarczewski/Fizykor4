@@ -1,17 +1,17 @@
 package com.clakestudio.pc.fizykor.equations
 
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.clakestudio.pc.fizykor.R
 import com.clakestudio.pc.fizykor.databinding.FragmentEquationsBinding
 
-class EquationsFragment : Fragment() {
+class EquationsFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var viewDataBinding: FragmentEquationsBinding
     private lateinit var equationsAdapter: EquationsAdapter
@@ -40,7 +40,7 @@ class EquationsFragment : Fragment() {
             setOnClickListener {
                 viewDataBinding.viewmodel!!.openFlashCards()
             }
-            (layoutParams as CoordinatorLayout.LayoutParams).anchorId = View.NO_ID
+            (layoutParams as androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams).anchorId = View.NO_ID
         }
     }
 
@@ -50,7 +50,7 @@ class EquationsFragment : Fragment() {
             viewDataBinding.rvEquations.apply {
                 equationsAdapter = EquationsAdapter(arrayListOf())
                 setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(context)
+                layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
                 viewDataBinding.rvEquations.adapter = equationsAdapter
             }
         }

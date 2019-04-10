@@ -1,16 +1,16 @@
 package com.clakestudio.pc.fizykor.equations
 
 import android.annotation.SuppressLint
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GestureDetectorCompat
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import androidx.core.view.GestureDetectorCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.app_bar_equations.*
 
 class EquationsActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var drawerLayout: androidx.drawerlayout.widget.DrawerLayout
     private lateinit var equationsViewModel: EquationsViewModel
     private var checkedItemId: Int = R.id.kinematyka
 
@@ -68,7 +68,7 @@ class EquationsActivity : AppCompatActivity() {
 
 
     private fun setupNavigationDrawer() {
-        drawerLayout = (findViewById<DrawerLayout>(R.id.drawer_layout)).apply {
+        drawerLayout = (findViewById<androidx.drawerlayout.widget.DrawerLayout>(R.id.drawer_layout)).apply {
             setStatusBarBackground(R.color.colorPrimaryDark)
         }
         setUpDrawerContent(findViewById(R.id.nav_view))

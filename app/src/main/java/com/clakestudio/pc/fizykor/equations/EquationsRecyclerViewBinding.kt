@@ -1,7 +1,7 @@
 package com.clakestudio.pc.fizykor.equations
 
-import android.databinding.BindingAdapter
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import com.clakestudio.pc.fizykor.data.Equation
 
@@ -9,7 +9,7 @@ object EquationsRecyclerViewBinding {
 
     @JvmStatic
     @BindingAdapter("app:equations")
-    fun setEquations(recyclerView: RecyclerView, equations: ArrayList<Equation>) {
+    fun setEquations(recyclerView: androidx.recyclerview.widget.RecyclerView, equations: ArrayList<Equation>) {
         with(recyclerView.adapter as EquationsAdapter) {
 
             if (!equations.isEmpty()) {
